@@ -1179,6 +1179,18 @@
   }
 }
 
+.budget-subheader {
+  @include grid-row;
+
+  .current-phase {
+    text-transform: uppercase;
+  }
+
+  .button {
+    margin-top: $line-height * 1.5;
+  }
+}
+
 .jumbo-budget {
   background: $budget;
   border-bottom: 1px solid $budget;
