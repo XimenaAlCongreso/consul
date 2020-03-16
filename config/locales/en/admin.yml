@@ -178,6 +178,7 @@ en:
         duration: "Phase's duration"
         duration_description: "The period of time this phase will be active."
         enabled_help_text: This phase will be public in the budget's phases timeline, as well as active for any other purpose
+        image_description: "If an image is uplodaded it will be used as the banner on top of this participatory budget when this phase is enabled, otherwise the default color for budgets will be used."
         save_changes: Save changes
       index:
         help: "Participatory budgets have different phases. Here you can enable or disable phases and also customize each individual phase."
