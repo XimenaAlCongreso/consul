@@ -16,10 +16,10 @@ class Admin::BudgetPhases::PhasesComponent < ApplicationComponent
     end
 
     def end_date(phase)
-      formatted_date(phase.ends_at)
+      formatted_date(phase.ends_at - 1.minute)
     end
 
     def formatted_date(time)
-      time_tag(time.to_date) if time.present?
+      time_tag(time, format: :long) if time.present?
     end
 end

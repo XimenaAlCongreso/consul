@@ -266,19 +266,19 @@ describe "Admin budgets", :admin do
           expect("Reviewing voting").to appear_before("Finished budget")
 
           within "tr", text: "Information" do
-            expect(page).to have_content "2015-07-15 - 2015-08-15"
+            expect(page).to have_content "July 15, 2015 00:00 - August 14, 2015 23:59"
             expect(page).not_to have_content "Active"
           end
 
           within "tr", text: "Selecting projects" do
-            expect(page).to have_content "2015-10-15 - 2015-11-15"
+            expect(page).to have_content "October 15, 2015 00:00 - November 14, 2015 23:59"
             expect(page).to have_css ".budget-phase-enabled.enabled"
             expect(page).to have_link "Edit phase"
             expect(page).to have_content "Active"
           end
 
           within "tr", text: "Valuating" do
-            expect(page).to have_content "2015-11-15 - 2015-12-15"
+            expect(page).to have_content "November 15, 2015 00:00 - December 14, 2015 23:59"
             expect(page).not_to have_content "Active"
           end
         end
