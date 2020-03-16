@@ -9,7 +9,7 @@ class Budgets::PhasesComponent < ApplicationComponent
   private
 
     def phases
-      budget.published_phases
+      budget.published_phases.to_a
     end
 
     def start_date(phase)

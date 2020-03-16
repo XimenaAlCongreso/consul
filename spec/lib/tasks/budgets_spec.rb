@@ -82,6 +82,7 @@ describe "budget tasks" do
       budget_phase.update!(
         description_en: "English description",
         description_es: "Spanish description",
+        name_es: "Spanish name",
         summary_en: "English summary")
 
       run_rake_task
@@ -89,6 +90,27 @@ describe "budget tasks" do
       budget_phase.reload
       expect(budget_phase.description_en).to eq "English description<br>English summary"
       expect(budget_phase.description_es).to eq "Spanish description"
+    end
+  end
+
+  describe "add_name_to_existing_phases" do
+    let(:run_rake_task) do
+      Rake::Task["budgets:add_name_to_existing_phases"].reenable
+      Rake.application.invoke_task("budgets:add_name_to_existing_phases")
+    end
+
+    it "adds the name to existing budget phases" do
+      budget = create(:budget)
+      informing_phase = budget.phases.informing
+      accepting_phase = budget.phases.accepting
+      Budget::Phase::Translation.find_by(budget_phase_id: informing_phase.id).update_columns(name: "")
+      expect(informing_phase.name).to eq ""
+      expect(accepting_phase.name).to eq "Accepting projects"
+
+      run_rake_task
+
+      expect(informing_phase.reload.name).to eq "Information"
+      expect(accepting_phase.reload.name).to eq "Accepting projects"
     end
   end
 end

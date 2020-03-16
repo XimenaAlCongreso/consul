@@ -42,4 +42,29 @@ namespace :budgets do
       end
     end
   end
+
+  desc "Add name to existing budget phases"
+  task add_name_to_existing_phases: :environment do
+    ApplicationLogger.new.info "Adding names to budgets phases"
+
+    Budget::Phase.find_each do |phase|
+      unless phase.name.present?
+        if phase.translations.present?
+          phase.translations.each do |translation|
+            unless translation.name.present?
+              if I18n.available_locales.include? translation.locale
+                locale = translation.locale
+              else
+                locale = I18n.default_locale
+              end
+              i18n_name = I18n.t("budgets.phase.#{translation.globalized_model.kind}", locale: locale)
+              translation.update!(name: i18n_name)
+            end
+          end
+        else
+          phase.translations.create!(name: I18n.t("budgets.phase.#{phase.kind}"), locale: I18n.default_locale)
+        end
+      end
+    end
+  end
 end

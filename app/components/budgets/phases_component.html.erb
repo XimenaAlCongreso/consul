@@ -6,7 +6,7 @@
   <ul class="phases-list tabs" data-tabs id="budget_phases_tabs" data-deep-link="true">
     <% phases.each_with_index do |phase, index| %>
       <li class="phase-title tabs-title <%= "is-active" if phase.current? %>" <%= "aria-current=step" if phase.current? %>>
-        <a href="#<%= index + 1 %>"
+        <a href="#<%= index + 1 %>-<%= phase.name.parameterize %>"
            data-turbolinks="false">
           <% if phase.current? %>
             <span class="current-phase-timeline"><%= t("budgets.index.current_phase") %></span>
@@ -21,12 +21,13 @@
   <div class="tabs-content" data-tabs-content="budget_phases_tabs">
     <% phases.each_with_index do |phase, index| %>
       <div class="tabs-panel <%= "is-active" if phase.current? %>"
-           id="<%= index + 1 %>" data-turbolinks="false">
+           id="<%= index + 1 %>-<%= phase.name.parameterize %>" data-turbolinks="false">
 
         <% if phases.first == phase %>
           <span class="budget-prev-phase-disabled"></span>
         <% else %>
-          <a href="#<%= (index + 1) - 1 %>" title="<%= t("budgets.index.prev_phase") %>"
+          <a href="#<%= index %>-<%= phases[index - 1].name.parameterize %>"
+             title="<%= t("budgets.index.prev_phase") %>"
              class="budget-prev-phase">
             <span class="show-for-sr"><%= t("budgets.index.prev_phase") %></span>
           </a>
@@ -35,7 +36,8 @@
         <% if phases.last == phase %>
           <span class="budget-next-phase-disabled"></span>
         <% else %>
-          <a href="#<%= (index + 1) + 1 %>" title="<%= t("budgets.index.next_phase") %>"
+          <a href="#<%= index + 2 %>-<%= phases[index + 1].name.parameterize %>"
+             title="<%= t("budgets.index.next_phase") %>"
              class="budget-next-phase">
             <span class="show-for-sr"><%= t("budgets.index.next_phase") %></span>
           </a>
