@@ -29,4 +29,17 @@ namespace :budgets do
       end
     end
   end
+
+  desc "Copies the Budget::Phase summary into description"
+  task phases_summary_to_description: :environment do
+    ApplicationLogger.new.info "Adding budget phases summary to descriptions"
+
+    Budget::Phase::Translation.find_each do |phase|
+      if phase.summary.present?
+        phase.description << "<br>"
+        phase.description << phase.summary
+        phase.update!(summary: nil) if phase.save
+      end
+    end
+  end
 end
