@@ -96,7 +96,7 @@ es:
         publish: "Publicar presupuesto"
         delete: Eliminar presupuesto
         phase: Fase
-        dates: Fechas
+        duration: "Duración"
         enabled: Habilitada
         actions: Acciones
         edit_phase: Editar fase

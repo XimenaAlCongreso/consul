@@ -96,7 +96,7 @@ en:
         publish: "Publish budget"
         delete: Delete budget
         phase: Phase
-        dates: Dates
+        duration: "Duration"
         enabled: Enabled
         actions: Actions
         edit_phase: Edit phase
