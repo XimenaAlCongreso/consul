@@ -25,7 +25,13 @@
           <% end %>
         </td>
         <td class="text-center">
-          <span class="budget-phase-enabled <%= phase.enabled? ? "enabled" : "disabled" %>"></span>
+          <%= check_box :phase, :enabled, checked: phase.enabled?, id: "phase_#{phase.id}_enabled",
+                        aria: {
+                          label: t("admin.budgets.edit.enable_phase", phase: t("budgets.phase.#{phase.kind}"))
+                        },
+                        data: {
+                          url: toggle_enable_admin_budget_budget_phase_path(phase.budget, phase)
+                        } %>
         </td>
         <td>
           <%= render Admin::TableActionsComponent.new(phase,

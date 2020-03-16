@@ -272,7 +272,7 @@ describe "Admin budgets", :admin do
 
           within "tr", text: "Selecting projects" do
             expect(page).to have_content "October 15, 2015 00:00 - November 14, 2015 23:59"
-            expect(page).to have_css ".budget-phase-enabled.enabled"
+            expect(page).to have_field "Enable Selecting projects phase"
             expect(page).to have_link "Edit phase"
             expect(page).to have_content "Active"
           end

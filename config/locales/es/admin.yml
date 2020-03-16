@@ -98,6 +98,7 @@ es:
         enabled: Habilitada
         actions: Acciones
         edit_phase: Editar fase
+        enable_phase: "Habilitar fase de %{phase}"
         active: Activa
         blank_dates: Sin fechas
         administrators:
