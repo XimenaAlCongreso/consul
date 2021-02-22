@@ -41,11 +41,11 @@ describe "Admin budgets", :admin do
     end
 
     scenario "Displaying budgets" do
-      budget = create(:budget)
+      budget = create(:budget, :accepting)
       visit admin_budgets_path
 
       expect(page).to have_content(budget.name)
-      expect(page).to have_content(translated_phase_name(phase_kind: budget.phase))
+      expect(page).to have_content("Accepting projects")
     end
 
     scenario "Filters by phase" do
@@ -245,35 +245,41 @@ describe "Admin budgets", :admin do
   end
 
   context "Edit" do
-    let!(:budget) { create(:budget) }
+    let(:budget) { create(:budget) }
 
     scenario "Show phases table" do
-      budget.update!(phase: "selecting")
+      travel_to(Date.new(2015, 7, 15)) do
+        budget.update!(phase: "selecting")
 
-      visit admin_budgets_path
-      click_link "Edit budget"
+        visit edit_admin_budget_path(budget)
 
-      expect(page).to have_select("budget_phase", selected: "Selecting projects")
+        expect(page).to have_select "Phase", selected: "Selecting projects"
 
-      within "#budget-phases-table" do
-        Budget::Phase::PHASE_KINDS.each do |phase_kind|
-          break if phase_kind == Budget::Phase::PHASE_KINDS.last
+        within "#budget-phases-table" do
+          expect("Information").to appear_before("Accepting projects")
+          expect("Accepting projects").to appear_before("Reviewing projects")
+          expect("Reviewing projects").to appear_before("Selecting projects")
+          expect("Selecting projects").to appear_before("Valuating projects")
+          expect("Valuating projects").to appear_before("Publishing projects prices")
+          expect("Publishing projects prices").to appear_before("Voting projects")
+          expect("Voting projects").to appear_before("Reviewing voting")
+          expect("Reviewing voting").to appear_before("Finished budget")
 
-          phase_index = Budget::Phase::PHASE_KINDS.index(phase_kind)
-          next_phase_kind = Budget::Phase::PHASE_KINDS[phase_index + 1]
-          next_phase_name = translated_phase_name(phase_kind: next_phase_kind)
-          expect(translated_phase_name(phase_kind: phase_kind)).to appear_before(next_phase_name)
-        end
+          within "tr", text: "Information" do
+            expect(page).to have_content "2015-07-15 - 2015-08-15"
+            expect(page).not_to have_content "Active"
+          end
 
-        budget.phases.each do |phase|
-          edit_phase_link = edit_admin_budget_budget_phase_path(budget, phase)
+          within "tr", text: "Selecting projects" do
+            expect(page).to have_content "2015-10-15 - 2015-11-15"
+            expect(page).to have_css ".budget-phase-enabled.enabled"
+            expect(page).to have_link "Edit phase"
+            expect(page).to have_content "Active"
+          end
 
-          within "#budget_phase_#{phase.id}" do
-            expect(page).to have_content(translated_phase_name(phase_kind: phase.kind))
-            expect(page).to have_content("#{phase.starts_at.to_date} - #{phase.ends_at.to_date}")
-            expect(page).to have_css(".budget-phase-enabled.enabled")
-            expect(page).to have_link("Edit phase", href: edit_phase_link)
-            expect(page).to have_content("Active") if phase.current?
+          within "tr", text: "Valuating" do
+            expect(page).to have_content "2015-11-15 - 2015-12-15"
+            expect(page).not_to have_content "Active"
           end
         end
       end
@@ -401,8 +407,4 @@ describe "Admin budgets", :admin do
       expect(page).not_to have_content "Calculate Winner Investments"
     end
   end
-end
-
-def translated_phase_name(phase_kind: kind)
-  I18n.t("budgets.phase.#{phase_kind}")
 end
