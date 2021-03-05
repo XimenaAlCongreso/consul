@@ -20,6 +20,6 @@ class Admin::BudgetPhases::PhasesComponent < ApplicationComponent
     end
 
     def formatted_date(time)
-      l(time.to_date) if time.present?
+      time_tag(time.to_date) if time.present?
     end
 end
