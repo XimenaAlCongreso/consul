@@ -410,9 +410,9 @@ es:
         homepage: "Descripción"
         milestones_summary: Seguimiento del proceso
       legislation/proposal:
-        description: "Texto desarrollado de la propuesta"
-        summary: "Resumen de la propuesta"
-        title: "Título de la propuesta"
+        description: "Testimonio: ¿Qué sucedió?, ¿cuáles fueron los agravios?, ¿cómo se te hubiera hecho justicia?"
+        summary: "Resumen del testimonio"
+        title: "Título del testimonio"
         video_url: "Enlace a vídeo externo"
       legislation/draft_version:
         title: Título de la versión
