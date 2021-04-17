@@ -53,6 +53,7 @@ module Consul
       "ca"    => "es",
       "es-PE" => "es",
       "eu"    => "es",
+      "en"    => "es",
       "fr"    => "es",
       "gl"    => "es",
       "it"    => "es",
