@@ -397,7 +397,7 @@ es:
         description: Las propuestas ciudadanas son una oportunidad para que los vecinos y colectivos decidan directamente cómo quieren que sea su ciudad, después de conseguir los apoyos suficientes y de someterse a votación ciudadana.
     new:
       form:
-        submit_button: Crear propuesta
+        submit_button: Crear testimonio
       more_info: '¿Cómo funcionan las propuestas ciudadanas?'
       recommendation_one: No escribas el título de la propuesta o frases enteras en mayúsculas. En internet eso se considera gritar. Y a nadie le gusta que le griten.
       recommendation_three: Disfruta de este espacio, de las voces que lo llenan, también es tuyo.
