@@ -48,7 +48,7 @@ es:
         description: En qué consiste
         more_info: Más información y contexto
       proposals:
-        empty_proposals: No hay propuestas
+        empty_proposals: No hay testimonios
         filters:
           random: Aleatorias
           winners: Seleccionadas
