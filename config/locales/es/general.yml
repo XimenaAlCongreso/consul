@@ -886,7 +886,7 @@ es:
         debates: Ahora mismo no hay debates
         proposals: Ahora mismo no hay propuestas
         processes: Ahora mismo no hay procesos abiertos
-      process_label: Proceso
+      process_label: Proceso 1
       see_process: Ver proceso
     cards:
       title: Destacados
